@@ -1,11 +1,6 @@
-def solution(n):
-    answer = ''
-    str = '수박'
-    if n%2==0:
-        answer = str*(n/2)
-    else:
-        answer = str*(n//2) + str[0]
-    return answer
+def water_melon(n):
+    s = "수박" * n
+    return s[:n]
 
 
-
+print(water_melon(4))

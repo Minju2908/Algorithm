@@ -3,12 +3,12 @@ def solution(participant, completion):
     answer = ''
     par_counter = Counter(participant)
     com_counter = Counter(completion)
+    a = list(par_counter-com_counter)
 
-    for per in participant:
-        if par_counter[per]!= com_counter[per]:
-            answer = per
-    return answer
+    print(a[0])
+
 
 participate = ['marina', 'josipa', 'nikola', 'vinko', 'filipa']
 completion = ['josipa', 'filipa', 'marina', 'nikola']
 
+solution(participate, completion)
