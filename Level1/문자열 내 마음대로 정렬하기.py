@@ -1,9 +1,8 @@
 def solution(strings, n):
     answer = []
-    answer= sorted(strings, key=lambda s:s[n])
+    for i in strings:
+        answer.append(i[n]+i)
+    arr = sorted(answer)
+    answer = list(i[1:] for i in arr)
     return answer
 
-
-strings = ['sun', 'bud', 'car']
-n = 1
-print(solution(strings, n))
