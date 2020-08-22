@@ -1,12 +1,13 @@
 def solution(number, k):
     answer = ''
     number = list(number)
-    pos = len(number)-k
-    _max = max(number[0:pos-1])
+    while k > 0:
+        for i in range(len(number) - 1):
+            if number[i] < number[i + 1]:
+                number.remove(number[i])
+                k -= 1
+                break
     answer = "".join([str(i) for i in number])
     return answer
 
-number = "87654321"
-k = 4
-a = solution(number, k)
-print(a)
+
