@@ -1,8 +1,8 @@
 from itertools import permutations
-from math import sqrt
+
 
 def find(num):
-    for i in range(2,sqrt(num)):
+    for i in range(2,num):
         back = num-1
         if num%i==0 or num%back == 0:
             return 0
