@@ -1,13 +1,14 @@
 def solution(number, k):
-    answer = ''
-    number = list(number)
-    while k > 0:
-        for i in range(len(number) - 1):
-            if number[i] < number[i + 1]:
-                number.remove(number[i])
-                k -= 1
-                break
-    answer = "".join([str(i) for i in number])
-    return answer
+    answer = []
+    for i in reversed(range(0,len(number)-k)):
+        num = number[0:len(number)-i]
+        answer.append(max(num))
+        number = number[number.find(max(num))+1:]
 
+    return ''.join(answer)
 
+number = '4177252841'
+k=4
+
+a = solution(number, k)
+print(a)
