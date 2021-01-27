@@ -1,11 +1,17 @@
 def solution(number, k):
-    answer = []
+    answer = ''
     for i in reversed(range(0,len(number)-k)):
         num = number[0:len(number)-i]
-        answer.append(max(num))
-        number = number[number.find(max(num))+1:]
-
+        if '9' in num:
+            M ='9'
+        else:
+            M = max(num)
+            answer+=M
+        number = number[number.find(M)+1:]
+        if len(number) == i:
+            return  ''.join(answer)+number
     return ''.join(answer)
+
 
 number = '4177252841'
 k=4
