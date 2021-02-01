@@ -1,6 +1,5 @@
 from itertools import permutations
 
-
 def find(num):
     for i in range(2,num):
         back = num-1
