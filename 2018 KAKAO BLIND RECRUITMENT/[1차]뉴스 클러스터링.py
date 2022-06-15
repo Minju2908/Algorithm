@@ -3,45 +3,55 @@
 
 from collections import Counter
 import math
-def solution(str1, str2):
-    # 집합 원소 카운트 -> 집합 or 다중 집합
-    # 합집합 / 교집합 생성
-    # 계산
-    answer = 0
 
-    inter = []
-    union = []
+def my_solution(str1, str2):
+    inter = 0
+    union = 0
     str1 = [str1[i:i + 2].upper() for i in range(len(str1)) if str1[i:i+2].isalpha() and len(str1[i:i+2]) == 2]
     str2 = [str2[i:i + 2].upper() for i in range(len(str2)) if str2[i:i+2].isalpha() and len(str2[i:i+2]) == 2]
 
     if not str1 and not str2:
-        return 1 * 65536
+        answer = 1
+    else:
+        dict1 = Counter(str1)
+        key1 = dict1.keys()
 
-    dict1 = Counter(str1)
-    key1 = dict1.keys()
+        dict2 = Counter(str2)
+        key2 = dict2.keys()
 
-    dict2 = Counter(str2)
-    key2 = dict2.keys()
+        for k in key1:
+            if not k in key2:
+                union += dict1[k]
 
-    for str in key2:
-        if str not in key1:
-            union.extend([str]*dict2[str])
-        elif str in key1:
-
-            a = dict1[str]
-            b = dict2[str]
-
-            union += max(a, b)
-            inter += min(a, b)
-
-            if a > b:
-                dict1[str] -= dict2[str]
+        for k in key2:
+            if not k in key1:
+                union += dict2[k]
             else:
-                del(dict1[str])
+                union += max(dict1[k], dict2[k])
+                inter += min(dict1[k], dict2[k])
 
-    union += sum(dict1.values())
-    answer = math.trunc((inter/union) * 65536)
-    return answer
+        answer = inter/union
 
-print(solution('aa1+aa2', 'AAAA12'))
-print((2/3)*65536)
+    return math.trunc(answer * 65536)
+
+def answer(str1, str2):
+    str1 = [str1[i:i + 2].upper() for i in range(len(str1)) if str1[i:i+2].isalpha() and len(str1[i:i+2]) == 2]
+    str2 = [str2[i:i + 2].upper() for i in range(len(str2)) if str2[i:i+2].isalpha() and len(str2[i:i+2]) == 2]
+
+    # set 함수를 통해 list안에 중복원소를 제거할 수 있다.
+    # '&' 기호는 같은 원소를 {} type으로 추출한다.
+    # '|' 기호는 다른 원소를 {} type으로 추출한다.
+    inter = set(str1) & set(str2)
+    union = set(str1) | set(str2)
+
+    if not union:
+        answer = 1
+    else:
+        inter = sum([min(str1.count(i), str2.count(i)) for i in inter])
+        union = sum([max(str1.count(i), str2.count(i)) for i in union])
+
+        answer = inter/union
+
+    return math.trunc(answer*65536)
+
+print(answer('E=M*C^2', 'e=m*c^2'))
